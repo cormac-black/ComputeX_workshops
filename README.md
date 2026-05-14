@@ -7,7 +7,7 @@ Repository for ComputeX workshop files. ComputeX is a Sponsored Student Organiza
 |CSV Data Matters|Pandas|Link|
 |Intro to Machine Learning| PyTorch | Link |
 
-python-workbook-packs/
+
 │
 ├── README.md
 ├── workshops/
