@@ -3,4 +3,4 @@ Repository for ComputeX workshop files. ComputeX is a Sponsored Student Organiza
 
 | Workshop Title | Tools | Workbook |
 |----------------|-------|----------|
-|Row 1, Col 1 |Row 1, Col 2|Row 1, Col 2|
+|How Computers See |OpenCV, Numpy|Link|
