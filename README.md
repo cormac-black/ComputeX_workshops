@@ -5,4 +5,4 @@ Repository for ComputeX workshop files. ComputeX is a Sponsored Student Organiza
 |:----------------|-------|:----------:|
 |How Computers See |OpenCV, Numpy|Link|
 |CSV Data Matters|Pandas|Link|
-|Intro to ML Play| PyTorch | Link |
+|Intro to Machine Learning| PyTorch | Link |
