@@ -2,7 +2,7 @@
 Repository for ComputeX workshop files. ComputeX is a Sponsored Student Organization at the Univ. of Michigan
 
 | Workshop Title | Tools            | Workbook |
-|----------------|-------|----------:|
+|:----------------|-------|:----------:|
 |How Computers See |OpenCV, Numpy|Link|
-|CSV Data|Pandas|Link|
-|GitHub GitPizza | GitHub | Link |
+|CSV Data Matters|Pandas|Link|
+|Intro to ML Play| PyTorch | Link |
