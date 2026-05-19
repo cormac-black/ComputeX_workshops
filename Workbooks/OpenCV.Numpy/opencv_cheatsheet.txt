@@ -1,0 +1,263 @@
+================================================================================
+OPENCV CHEATSHEET - Common Operations
+================================================================================
+
+1. IMPORTING & SETUP
+================================================================================
+import cv2
+import numpy as np
+
+
+2. IMAGE I/O
+================================================================================
+# Read image from file
+img = cv2.imread('path/to/image.jpg')
+img_gray = cv2.imread('path/to/image.jpg', cv2.IMREAD_GRAYSCALE)
+
+# Write image to file
+cv2.imwrite('output.jpg', img)
+
+# Display image
+cv2.imshow('Window Title', img)
+cv2.waitKey(0)  # Wait for key press (0 = wait indefinitely)
+cv2.destroyAllWindows()
+
+
+3. IMAGE PROPERTIES
+================================================================================
+height, width = img.shape[:2]
+height, width, channels = img.shape  # For color images
+print(f"Shape: {img.shape}, Data type: {img.dtype}")
+
+
+4. COLOR CONVERSION
+================================================================================
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
+
+
+5. RESIZING & SCALING
+================================================================================
+# Resize to specific dimensions
+resized = cv2.resize(img, (width, height))
+
+# Resize by scale factor
+resized = cv2.resize(img, None, fx=0.5, fy=0.5)  # Half size
+
+# Resize methods: cv2.INTER_LINEAR, cv2.INTER_AREA, cv2.INTER_CUBIC
+
+
+6. CROPPING
+================================================================================
+# Crop image: img[y_start:y_end, x_start:x_end]
+cropped = img[100:300, 50:250]
+
+
+7. ROTATION
+================================================================================
+rows, cols = img.shape[:2]
+center = (cols // 2, rows // 2)
+angle = 45
+scale = 1.0
+rotation_matrix = cv2.getRotationMatrix2D(center, angle, scale)
+rotated = cv2.warpAffine(img, rotation_matrix, (cols, rows))
+
+
+8. BLURRING & SMOOTHING
+================================================================================
+# Gaussian blur
+blurred = cv2.GaussianBlur(img, (5, 5), 0)  # kernel_size must be odd
+
+# Median blur
+median = cv2.medianBlur(img, 5)
+
+# Bilateral filter (preserves edges)
+bilateral = cv2.bilateralFilter(img, 9, 75, 75)
+
+
+9. EDGE DETECTION
+================================================================================
+# Canny edge detection
+edges = cv2.Canny(gray, 100, 200)  # threshold1, threshold2
+
+# Sobel
+sobelx = cv2.Sobel(gray, cv2.CV_64F, 1, 0, ksize=5)
+sobely = cv2.Sobel(gray, cv2.CV_64F, 0, 1, ksize=5)
+edges = np.sqrt(sobelx**2 + sobely**2)
+
+# Laplacian
+laplacian = cv2.Laplacian(gray, cv2.CV_64F)
+
+
+10. THRESHOLDING
+================================================================================
+# Binary threshold
+ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
+# Adaptive threshold (better for varying lighting)
+adaptive = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
+                                   cv2.THRESH_BINARY, 11, 2)
+
+# Otsu's method (automatic threshold)
+ret, binary = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+
+
+11. MORPHOLOGICAL OPERATIONS
+================================================================================
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
+
+# Erosion
+eroded = cv2.erode(img, kernel, iterations=1)
+
+# Dilation
+dilated = cv2.dilate(img, kernel, iterations=1)
+
+# Opening (erosion + dilation)
+opening = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
+
+# Closing (dilation + erosion)
+closing = cv2.morphologyEx(img, cv2.MORPH_CLOSE, kernel)
+
+
+12. CONTOURS
+================================================================================
+# Find contours
+contours, hierarchy = cv2.findContours(binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+# Draw contours
+cv2.drawContours(img, contours, -1, (0, 255, 0), 2)  # -1 = all contours
+
+# Get contour info
+area = cv2.contourArea(contour)
+perimeter = cv2.arcLength(contour, True)
+approx = cv2.approxPolyDP(contour, 0.02 * perimeter, True)
+
+
+13. DRAWING SHAPES
+================================================================================
+# Line
+cv2.line(img, (0, 0), (100, 100), (0, 255, 0), 2)
+
+# Rectangle
+cv2.rectangle(img, (10, 10), (100, 100), (0, 0, 255), 2)
+cv2.rectangle(img, (10, 10), (100, 100), (0, 0, 255), -1)  # Filled
+
+# Circle
+cv2.circle(img, (50, 50), 30, (255, 0, 0), 2)
+
+# Ellipse
+cv2.ellipse(img, (50, 50), (30, 20), 0, 0, 360, (255, 0, 0), 2)
+
+# Text
+cv2.putText(img, 'Hello', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
+
+
+14. VIDEO CAPTURE
+================================================================================
+# Open webcam (0) or video file
+cap = cv2.VideoCapture(0)  # 0 = default camera
+
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+
+    # Process frame
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    cv2.imshow('frame', frame)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+
+
+15. HISTOGRAMS
+================================================================================
+# Calculate histogram
+hist = cv2.calcHist([img], [0], None, [256], [0, 256])
+
+# Draw histogram
+plt.plot(hist)
+plt.show()
+
+# Equalize histogram
+equalized = cv2.equalizeHist(gray)
+
+# CLAHE (Contrast Limited Adaptive Histogram Equalization)
+clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+cl_img = clahe.apply(gray)
+
+
+16. TEMPLATE MATCHING
+================================================================================
+# Find template in image
+template = cv2.imread('template.jpg', cv2.IMREAD_GRAYSCALE)
+result = cv2.matchTemplate(gray, template, cv2.TM_CCOEFF)
+min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
+
+
+17. FEATURE DETECTION
+================================================================================
+# ORB (Oriented FAST and Rotated BRIEF)
+orb = cv2.ORB_create()
+kp, des = orb.detectAndCompute(img, None)
+
+# SIFT (requires opencv-contrib-python)
+sift = cv2.SIFT_create()
+kp, des = sift.detectAndCompute(img, None)
+
+# Draw keypoints
+img_kp = cv2.drawKeypoints(img, kp, None)
+
+
+18. USEFUL CONSTANTS
+================================================================================
+cv2.IMREAD_COLOR       # Load image in color (default)
+cv2.IMREAD_GRAYSCALE   # Load image in grayscale
+cv2.IMREAD_UNCHANGED   # Load with alpha channel
+
+cv2.COLOR_BGR2GRAY     # Blue-Green-Red to Grayscale
+cv2.COLOR_BGR2RGB      # Blue-Green-Red to Red-Green-Blue
+cv2.COLOR_BGR2HSV      # To Hue-Saturation-Value
+
+cv2.INTER_LINEAR       # Bilinear interpolation
+cv2.INTER_AREA         # Resampling using pixel area
+cv2.INTER_CUBIC        # Bicubic interpolation
+
+cv2.MORPH_RECT         # Rectangular kernel
+cv2.MORPH_ELLIPSE      # Elliptical kernel
+cv2.MORPH_CROSS        # Cross-shaped kernel
+
+
+19. QUICK REFERENCE - IMAGE FORMATS
+================================================================================
+BGR format:   Blue-Green-Red (default OpenCV format)
+Grayscale:    Single channel (0-255)
+HSV:          Hue-Saturation-Value (good for color detection)
+RGB:          Red-Green-Blue (PIL/matplotlib format)
+
+
+20. COMMON WORKFLOWS
+================================================================================
+# Basic image processing pipeline
+img = cv2.imread('image.jpg')
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+blurred = cv2.GaussianBlur(gray, (5, 5), 0)
+edges = cv2.Canny(blurred, 100, 200)
+cv2.imshow('Edges', edges)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+# Finding objects in an image
+contours, _ = cv2.findContours(binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+for contour in contours:
+    if cv2.contourArea(contour) > min_area:
+        cv2.drawContours(img, [contour], 0, (0, 255, 0), 2)
+
+================================================================================
+
+Made by Claude Haiku 4.5 $1/5, Cost $.06, 5.14.26, ts
