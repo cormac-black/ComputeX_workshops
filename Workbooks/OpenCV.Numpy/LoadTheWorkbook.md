@@ -5,7 +5,8 @@ This workbook introduces students to image processing in Python. Students will l
 
 Click the button below to open the workbook in Google Colab:
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1wulqtdiPfiscjAMpvniZp8fXNSeeOw7t?usp=sharing)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1wulqtdiPfiscjAMpvniZp8fXNSeeOw7t?usp=sharing&copy=true)
+
 
 If the button does not work, use this direct link:
 
