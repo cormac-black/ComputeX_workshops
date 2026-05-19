@@ -10,14 +10,12 @@ Click the button below to open the workbook in Google Colab:
 
 If the button does not work, use this direct link:
 
-https://colab.research.google.com/drive/1wulqtdiPfiscjAMpvniZp8fXNSeeOw7t?usp=sharing
+https://colab.research.google.com/drive/1wulqtdiPfiscjAMpvniZp8fXNSeeOw7t?usp=sharing&copy=true
 
-## First step after opening
-
-Once the notebook opens in Colab, make your own editable copy:
-
-**File → Save a copy in Drive**
+##  You now have your own copy!
 
 That copy is yours to edit, break, fix, remix, and keep.
 
 Please do not request edit access to the original notebook.
+
+[[This **should** automatically open a copy in the users Google Drive. Needs to be tested]]
