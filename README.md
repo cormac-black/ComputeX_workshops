@@ -1,7 +1,8 @@
-# ComputeX_workshops
+# ComputeX_workshops:
 Repository for ComputeX workshop files. ComputeX is a Sponsored Student Organization at the Univ. of Michigan.
 
-ComputeX encourages learning by playing with an adapting the code in these public workbooks; however, we encourage you to observe the integrity policies of your courses.
+# Reuse Policy:
+ComputeX encourages learning by playing with and adapting the code in these public workbooks; however, we encourage you to observe the use policies of your courses. 
 
 | Workshop Title | Tools            | Workbook |
 |:----------------|-------|:----------:|
