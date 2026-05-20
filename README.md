@@ -6,7 +6,7 @@ ComputeX encourages learning through exploration, modification, and adaptation o
 
 | Workshop Title | Tools            | Workbook |
 |:----------------|-------|:----------:|
-|How Computers See |OpenCV, Numpy|<a href="https://colab.research.google.com/drive/1wulqtdiPfiscjAMpvniZp8fXNSeeOw7t?usp=sharing&forceEdit=true&sandboxMode=true">Link</a>|
+|How Computers See |OpenCV, Numpy|<a href="https://colab.research.google.com/drive/1wulqtdiPfiscjAMpvniZp8fXNSeeOw7t?usp=sharing&copy=true">Link</a>|
 |CSV Data Matters|Pandas|Link|
 |Intro to Machine Learning| PyTorch | Link |
 
